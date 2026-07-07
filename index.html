@@ -483,9 +483,12 @@ function unlockGuide(){
     lead_magnet: "Protocole Signal Vert",
     tag: "Lead CENTIMETRES"
   };
-  console.log('À envoyer vers GHL :', payload);
 
-  // fetch("WEBHOOK_GHL", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload) });
+  fetch("https://services.leadconnectorhq.com/hooks/o082jAoDoAcfofcKkSpB/webhook-trigger/9d13e017-0db2-4a60-a832-cd9f42ae5135", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
 
   // déverrouille le guide + amène la lectrice au début du contenu
   gate.style.display = 'none';
@@ -494,10 +497,8 @@ function unlockGuide(){
 }
 
 function goRDV(){
-  /* Redirection vers le calendrier de booking GHL — à activer après config */
-  console.log('Redirection RDV consultation GHL');
-  // window.location.href = "LIEN_BOOKING_GHL";
-  alert("[ Redirection agenda GHL — à connecter avec Mélanie ]");
+  /* Redirection vers le calendrier de booking GHL (Protocole Signal Vert) */
+  window.location.href = "https://api.leadconnectorhq.com/widget/booking/LDKr3AhhrPNw4bPSvs29";
 }
 </script>
 </body>
