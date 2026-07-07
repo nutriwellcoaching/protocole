@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Protocole Signal Vert™ — NutriWell by Clémence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --capucine:#DB6350;
+    --capucine-fonce:#B84F3F;
+    --ballerine:#ECB5B0;
+    --ballerine-soft:#F8E5E2;
+    --creme:#FAF7F5;
+    --brun:#2D2326;
+    --brun-moyen:#6b5d60;
+    --blanc:#ffffff;
+    --vert:#7BA894;
+    --vert-soft:#EAF2EE;
+    --ombre:0 24px 60px -28px rgba(184,79,63,.30);
+    --ombre-soft:0 12px 34px -20px rgba(184,79,63,.22);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+
+  body{
+    font-family:'Poppins',system-ui,sans-serif;
+    background:
+      radial-gradient(130% 60% at 50% -8%, var(--ballerine-soft) 0%, transparent 50%),
+      var(--creme);
+    color:var(--brun);
+    line-height:1.68;
+    font-weight:400;
+    padding:0 0 60px;
+  }
+
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+
+  /* ---------- barre progression lecture ---------- */
+  .readbar{
+    position:fixed;top:0;left:0;height:4px;width:0;
+    background:linear-gradient(90deg,var(--ballerine),var(--capucine));
+    z-index:99;transition:width .12s linear;
+  }
+
+  /* ---------- marque ---------- */
+  .brand{
+    text-align:center;padding:34px 0 8px;
+  }
+  .brand .mono{
+    font-family:'Lora',serif;font-weight:700;color:var(--capucine);
+    font-size:15px;letter-spacing:.34em;text-transform:uppercase;
+  }
+  .brand .sub{
+    font-size:9.5px;letter-spacing:.44em;text-transform:uppercase;
+    color:var(--brun-moyen);margin-top:4px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    text-align:center;padding:26px 0 10px;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--capucine);font-weight:600;
+    background:var(--ballerine-soft);
+    padding:7px 16px;border-radius:99px;margin-bottom:22px;
+  }
+  h1{
+    font-family:'Lora',serif;font-weight:600;
+    font-size:clamp(32px,7.5vw,50px);line-height:1.06;
+    letter-spacing:-.5px;margin-bottom:20px;
+  }
+  h1 .accent{color:var(--capucine);font-style:italic}
+  .hero-lede{
+    font-size:clamp(16px,2.6vw,18.5px);color:var(--brun-moyen);
+    max-width:52ch;margin:0 auto;
+  }
+  .flower-div{
+    text-align:center;color:var(--ballerine);
+    font-size:17px;letter-spacing:.5em;margin:30px 0;
+  }
+
+  /* ---------- gate / capture ---------- */
+  .gate{
+    background:var(--blanc);border-radius:24px;
+    padding:38px 32px 34px;box-shadow:var(--ombre);
+    position:relative;overflow:hidden;margin:8px 0 20px;
+  }
+  .gate::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,var(--ballerine),var(--capucine),var(--capucine-fonce));
+  }
+  .gate h2{
+    font-family:'Lora',serif;font-weight:600;font-size:clamp(22px,5vw,28px);
+    text-align:center;margin-bottom:12px;letter-spacing:-.3px;
+  }
+  .gate p.intro{
+    text-align:center;color:var(--brun-moyen);font-size:15px;
+    max-width:44ch;margin:0 auto 8px;
+  }
+  .fields{margin:26px 0 6px;display:flex;flex-direction:column;gap:13px}
+  .field label{
+    display:block;font-size:12px;letter-spacing:.03em;
+    color:var(--brun-moyen);margin-bottom:6px;font-weight:500;
+  }
+  .field input{
+    width:100%;border:1.5px solid var(--ballerine-soft);
+    background:var(--creme);border-radius:13px;padding:14px 16px;
+    font-family:inherit;font-size:15.5px;color:var(--brun);
+    transition:border-color .18s;
+  }
+  .field input:focus{outline:none;border-color:var(--capucine)}
+  .field input::placeholder{color:#c2b6b8}
+
+  /* ---------- CTA ---------- */
+  .cta{
+    display:block;width:100%;margin-top:22px;
+    background:linear-gradient(135deg,var(--capucine),var(--capucine-fonce));
+    color:var(--blanc);border:none;border-radius:99px;
+    padding:17px 26px;font-family:'Poppins',sans-serif;
+    font-weight:600;font-size:16px;cursor:pointer;letter-spacing:.01em;
+    box-shadow:0 14px 30px -12px rgba(184,79,63,.6);
+    transition:transform .16s ease,box-shadow .16s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 20px 40px -12px rgba(184,79,63,.7)}
+  .cta:focus-visible{outline:2.5px solid var(--brun);outline-offset:3px}
+  .reassure{text-align:center;font-size:12.5px;color:var(--brun-moyen);margin-top:14px}
+
+  /* ---------- corps du guide (masqué au départ) ---------- */
+  #guide{display:none;animation:rise .6s cubic-bezier(.2,.7,.3,1)}
+  #guide.show{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+  .section{margin:52px 0}
+  .step-tag{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--capucine);font-weight:600;margin-bottom:14px;
+  }
+  .step-tag .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--capucine);color:#fff;font-size:13px;font-weight:600;
+    letter-spacing:0;
+  }
+  h2.sec{
+    font-family:'Lora',serif;font-weight:600;
+    font-size:clamp(25px,5.4vw,34px);line-height:1.12;
+    letter-spacing:-.4px;margin-bottom:18px;
+  }
+  h2.sec .accent{color:var(--capucine);font-style:italic}
+  h3.sub{
+    font-family:'Lora',serif;font-weight:600;font-size:20px;
+    margin:26px 0 10px;color:var(--brun);
+  }
+  p{font-size:16.5px;margin-bottom:16px}
+  p .hi{color:var(--capucine-fonce);font-weight:600}
+  em{font-style:italic;color:var(--brun-moyen)}
+
+  .pull{
+    font-family:'Lora',serif;font-style:italic;font-weight:500;
+    font-size:clamp(20px,4.5vw,25px);line-height:1.4;
+    color:var(--capucine-fonce);
+    border-left:4px solid var(--capucine);
+    padding:6px 0 6px 22px;margin:30px 0;
+  }
+
+  .callout{
+    background:var(--vert-soft);border-radius:18px;
+    padding:24px 26px;margin:28px 0;
+    border:1px solid #d8e6df;
+  }
+  .callout .label{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--vert);font-weight:600;margin-bottom:10px;
+  }
+  .callout p{margin-bottom:0;font-size:15.5px}
+
+  /* encadré "vérité" — croyance renversée */
+  .flip{
+    background:var(--blanc);border-radius:18px;padding:6px 4px;
+    box-shadow:var(--ombre-soft);margin:26px 0;overflow:hidden;
+  }
+  .flip-row{display:flex;flex-wrap:wrap}
+  .flip-col{flex:1 1 240px;padding:20px 22px}
+  .flip-col.myth{background:var(--creme)}
+  .flip-col .tag{
+    font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    font-weight:600;margin-bottom:8px;
+  }
+  .flip-col.myth .tag{color:var(--brun-moyen)}
+  .flip-col.truth .tag{color:var(--vert)}
+  .flip-col p{font-size:15px;margin-bottom:0;line-height:1.5}
+  .flip-col.myth p{color:var(--brun-moyen)}
+
+  /* actions */
+  .action{
+    display:flex;gap:16px;margin:20px 0;
+    background:var(--blanc);border-radius:16px;padding:20px 22px;
+    box-shadow:var(--ombre-soft);
+  }
+  .action .a-num{
+    flex-shrink:0;font-family:'Lora',serif;font-weight:700;
+    font-size:26px;color:var(--ballerine);line-height:1;
+  }
+  .action h4{
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:16.5px;
+    margin-bottom:5px;color:var(--brun);
+  }
+  .action p{font-size:15px;margin-bottom:0;color:var(--brun-moyen)}
+
+  /* CTA final RDV */
+  .final{
+    background:linear-gradient(155deg,#fff 0%,var(--ballerine-soft) 100%);
+    border-radius:26px;padding:44px 34px 40px;text-align:center;
+    box-shadow:var(--ombre);margin-top:56px;position:relative;overflow:hidden;
+  }
+  .final::before{
+    content:"✿";position:absolute;top:18px;right:26px;
+    color:var(--ballerine);font-size:26px;opacity:.6;
+  }
+  .final h2{
+    font-family:'Lora',serif;font-weight:600;
+    font-size:clamp(24px,5.2vw,32px);line-height:1.14;margin-bottom:16px;
+  }
+  .final p{font-size:16px;color:var(--brun-moyen);max-width:46ch;margin:0 auto 8px}
+  .final .cta{max-width:420px;margin-left:auto;margin-right:auto;margin-top:26px}
+
+  .signoff{
+    text-align:center;margin:44px 0 0;
+  }
+  .signoff .name{
+    font-family:'Lora',serif;font-style:italic;font-size:22px;
+    color:var(--capucine-fonce);
+  }
+  .signoff .role{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--brun-moyen);margin-top:4px;
+  }
+
+  .footnote{
+    text-align:center;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brun-moyen);
+    margin-top:40px;opacity:.65;
+  }
+
+  @media(max-width:520px){
+    .gate{padding:30px 22px 28px;border-radius:20px}
+    .final{padding:34px 24px 32px}
+    .action{padding:17px 18px;gap:13px}
+  }
+</style>
+</head>
+<body>
+
+<div class="readbar" id="readbar"></div>
+
+<div class="wrap">
+
+  <div class="brand">
+    <div class="mono">NutriWell</div>
+    <div class="sub">by Clémence</div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <span class="eyebrow">Le protocole offert</span>
+    <h1>Tu manges de moins en moins.<br><span class="accent">Et rien ne bouge.</span></h1>
+    <p class="hero-lede">Ce n'est pas un manque de volonté. Ce n'est même pas ta faute. C'est un mécanisme — et une fois que tu le comprends, tout change. Je t'explique lequel, et par quoi commencer.</p>
+  </header>
+
+  <div class="flower-div">✿ ✿ ✿</div>
+
+  <!-- ============ GATE / CAPTURE ============ -->
+  <section class="gate" id="gate">
+    <h2>Reçois ton protocole 🤍</h2>
+    <p class="intro">Dis-moi juste où te l'envoyer. Tu accèdes au guide complet tout de suite, ici, et j'en garde une trace pour toi.</p>
+    <div class="fields">
+      <div class="field">
+        <label for="f-prenom">Ton prénom</label>
+        <input id="f-prenom" type="text" placeholder="Prénom" autocomplete="given-name">
+      </div>
+      <div class="field">
+        <label for="f-email">Ton email</label>
+        <input id="f-email" type="email" placeholder="prenom@email.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="f-tel">Ton téléphone</label>
+        <input id="f-tel" type="tel" placeholder="06 .. .. .. .." autocomplete="tel">
+      </div>
+    </div>
+    <button class="cta" onclick="unlockGuide()">J'accède à mon protocole&nbsp;→</button>
+    <p class="reassure">Aucun spam. Juste le protocole, et de vrais conseils. ✿</p>
+  </section>
+
+  <!-- ============ CORPS DU GUIDE ============ -->
+  <main id="guide">
+
+    <div class="flower-div">✿</div>
+
+    <!-- INTRO -->
+    <section class="section">
+      <p>Avant tout, je veux te dire une chose, parce que je sais que tu l'as entendue trop de fois : <span class="hi">tu n'es pas le problème.</span></p>
+      <p>Tu as été à responsabilités, tu as géré des équipes, une maison, des enfants peut-être, un agenda qui déborde. Tu es capable de tenir des choses bien plus dures qu'un « rééquilibrage alimentaire ». Alors si depuis des années ton corps ne répond plus, ce n'est pas parce que tu manques de discipline.</p>
+      <p>C'est parce qu'on t'a donné les mauvaises instructions. Des méthodes pensées pour un corps qui ne vit pas ton rythme. Ce petit guide, c'est l'inverse. On va d'abord <span class="hi">comprendre</span> pourquoi ça bloque. Puis je te donne <span class="hi">par quoi commencer</span>, concrètement, dès ce soir.</p>
+      <div class="pull">« On ne se prive pas. On apprend à manger. »</div>
+    </section>
+
+    <!-- PARTIE 1 : COMPRENDRE -->
+    <section class="section">
+      <div class="step-tag"><span class="num">1</span> Comprendre</div>
+      <h2 class="sec">Ton corps n'est pas cassé.<br><span class="accent">Il est en mode survie.</span></h2>
+      <p>Voilà ce que personne ne t'a expliqué. Chaque fois que tu t'es restreinte — chaque régime, chaque « je saute le déjeuner », chaque semaine à 1 200 calories — ton corps a reçu un seul et même message : <span class="hi">« danger, la nourriture se fait rare, stocke tout ce que tu peux. »</span></p>
+      <p>Ton corps ne sait pas que tu es une femme de 2026 devant un frigo plein. Il réagit comme il l'a toujours fait pour te garder en vie : il ralentit sa dépense, il verrouille ses réserves, il devient économe. C'est pour ça que tu peux manger très peu et ne rien perdre. Ce n'est pas de la magie. C'est de la biologie.</p>
+
+      <h3 class="sub">Et le craquage du soir, dans tout ça ?</h3>
+      <p>20h30. La maison est calme. Et tu te retrouves devant les placards, comme aspirée. Le matin tu culpabilises, tu te dis « demain je recommence ». Sauf que ce craquage n'est pas de la gourmandise, et surtout pas de la faiblesse.</p>
+      <p>C'est ton cerveau qui réclame ce que tu lui as refusé toute la journée. Après des heures de restriction et de charge mentale, il déclenche une réponse quasi automatique. <span class="hi">Tu ne craques pas parce que tu es faible. Tu craques parce que tu t'es trop privée avant.</span></p>
+
+      <div class="callout">
+        <div class="label">🟢 À retenir</div>
+        <p>Un corps qu'on rassure relâche. Un corps qu'on affame se protège. Tout le protocole tient dans cette phrase.</p>
+      </div>
+    </section>
+
+    <!-- PARTIE 2 : LE SIGNAL VERT -->
+    <section class="section">
+      <div class="step-tag"><span class="num">2</span> Le mécanisme</div>
+      <h2 class="sec">Le Protocole <span class="accent">Signal Vert™</span></h2>
+      <p>Si le problème vient d'un signal de danger envoyé en boucle à ton corps, alors la solution n'est pas d'en rajouter. C'est d'envoyer le signal <span class="hi">inverse</span>.</p>
+      <p>Le Signal Vert™, c'est exactement ça : on recommence à nourrir ton corps, stratégiquement, pour lui dire « c'est bon, tu n'es plus en danger, tu peux relâcher. » Quand il comprend ce message — et il le comprend vite — il arrête de tout stocker, sa machine hormonale se relance, et la perte devient naturelle. Sans faim. Sans frustration. Sans volonté surhumaine.</p>
+      <p>Oui, ça veut dire <span class="hi">manger plus pour perdre mieux.</span> Je sais que ça va à l'envers de tout ce qu'on t'a dit. C'est précisément pour ça que ça marche, là où le reste a échoué.</p>
+
+      <h3 class="sub">Pourquoi tes tentatives passées n'ont pas tenu</h3>
+      <p>Ce n'est pas toi qui as échoué. Ce sont les méthodes qui étaient structurellement incompatibles avec ton corps :</p>
+
+      <div class="flip">
+        <div class="flip-row">
+          <div class="flip-col myth">
+            <div class="tag">Ce qu'on t'a fait croire</div>
+            <p>« Si je craque, c'est que je manque de volonté. »</p>
+          </div>
+          <div class="flip-col truth">
+            <div class="tag">🟢 La vérité</div>
+            <p>C'est une réponse biologique à la restriction et à la fatigue. Pas un défaut de caractère.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip">
+        <div class="flip-row">
+          <div class="flip-col myth">
+            <div class="tag">Ce qu'on t'a fait croire</div>
+            <p>« Pour maigrir, je dois manger moins et souffrir. »</p>
+          </div>
+          <div class="flip-col truth">
+            <div class="tag">🟢 La vérité</div>
+            <p>Manger plus, intelligemment, est ce qui débloque un corps en mode survie.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip">
+        <div class="flip-row">
+          <div class="flip-col myth">
+            <div class="tag">Ce qu'on t'a fait croire</div>
+            <p>« Mon corps est foutu depuis mes grossesses / mon âge. »</p>
+          </div>
+          <div class="flip-col truth">
+            <div class="tag">🟢 La vérité</div>
+            <p>Ton corps s'adapte et se relance à tout âge, avec la bonne approche.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTIE 3 : AGIR -->
+    <section class="section">
+      <div class="step-tag"><span class="num">3</span> Agir</div>
+      <h2 class="sec">Par quoi tu commences,<br><span class="accent">dès aujourd'hui.</span></h2>
+      <p>Pas besoin de tout révolutionner ce soir. Voici 4 premiers pas simples pour envoyer un premier Signal Vert à ton corps. Choisis-en un, commence par lui.</p>
+
+      <div class="action">
+        <div class="a-num">1</div>
+        <div>
+          <h4>Prends un vrai petit-déjeuner protéiné</h4>
+          <p>Pas un café avalé debout. Des protéines dès le matin (œufs, skyr, fromage blanc). C'est le premier signal de sécurité de la journée — et ce qui calme le craquage du soir avant même qu'il arrive.</p>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="a-num">2</div>
+        <div>
+          <h4>Arrête de « compenser » le midi</h4>
+          <p>La petite salade triste mangée devant l'ordi « pour se rattraper » entretient le mode survie. Un vrai déjeuner complet, assise, c'est un investissement — pas un écart.</p>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="a-num">3</div>
+        <div>
+          <h4>Bouge sans « faire du sport »</h4>
+          <p>Oublie l'heure de salle impossible à caser. Marche, escaliers, activité du quotidien. C'est ce mouvement-là, discret et régulier, qui fait la vraie différence sur ton corps de femme débordée.</p>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="a-num">4</div>
+        <div>
+          <h4>Range la balance</h4>
+          <p>Pendant la phase de relance, ton poids peut bouger dans tous les sens — c'est normal, c'est même bon signe. On regarde la tendance sur les semaines, jamais une pesée isolée. Tes vêtements et ton énergie sont de bien meilleurs juges.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="label">🟢 Le principe qui tient tout</div>
+        <p>Adhérence avant perfection. Tu n'as pas besoin de tout faire parfaitement. Tu as besoin de faire un peu, mais de le tenir. C'est là que ton corps commence à te faire confiance.</p>
+      </div>
+    </section>
+
+    <!-- CTA FINAL RDV -->
+    <section class="final">
+      <h2>Ça, c'est le point de départ.<br>La suite se construit pour toi.</h2>
+      <p>Ce guide t'a donné le mécanisme et les premiers pas. Mais ton corps, ton histoire, ton rythme de vie sont uniques — et un vrai déblocage passe par un plan pensé pour toi, pas pour « une femme standard ».</p>
+      <p>Si tu sens que c'est ton moment, on prend 20 minutes ensemble. Je regarde où tu en es exactement, et je te dis honnêtement comment on débloque ta situation. Sans engagement.</p>
+      <button class="cta" onclick="goRDV()">Je réserve ma consultation offerte&nbsp;→</button>
+      <p class="reassure" style="margin-top:16px">Un échange vrai, entre nous. Tu repars avec un regard clair sur ta situation, quoi qu'il arrive. ✿</p>
+    </section>
+
+    <div class="signoff">
+      <div class="name">Clémence</div>
+      <div class="role">Fondatrice · NutriWell</div>
+    </div>
+
+    <div class="footnote">NutriWell by Clémence · Le Protocole Signal Vert™</div>
+
+  </main>
+
+</div>
+
+<script>
+/* ============================================================
+   PROTOCOLE SIGNAL VERT™ — lead magnet ADS (mot-clé CENTIMÈTRES)
+   Gate de capture → déverrouille le guide → CTA RDV.
+   Data envoyée à GHL (même logique que le quizz Le Déclic).
+   ============================================================ */
+
+const gate   = document.getElementById('gate');
+const guide  = document.getElementById('guide');
+const readbar= document.getElementById('readbar');
+
+/* --- barre de progression de lecture --- */
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+  readbar.style.width = Math.min(scrolled * 100, 100) + '%';
+});
+
+function unlockGuide(){
+  const prenom = document.getElementById('f-prenom').value.trim();
+  const email  = document.getElementById('f-email').value.trim();
+  const tel    = document.getElementById('f-tel').value.trim();
+
+  if(!prenom || !email || !tel){
+    alert("Laisse-moi juste ton prénom, ton email et ton téléphone pour que je t'envoie ton protocole ✿");
+    return;
+  }
+
+  /* ====================================================
+     POINT D'INTÉGRATION GHL — à câbler avec Mélanie
+     Contact créé + taggé "Lead CENTIMETRES" (source ADS).
+     Même pattern que le quizz Le Déclic.
+     ==================================================== */
+  const payload = {
+    prenom, email, tel,
+    source: "ads_centimetres",
+    lead_magnet: "Protocole Signal Vert",
+    tag: "Lead CENTIMETRES"
+  };
+  console.log('À envoyer vers GHL :', payload);
+
+  // fetch("WEBHOOK_GHL", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload) });
+
+  // déverrouille le guide + amène la lectrice au début du contenu
+  gate.style.display = 'none';
+  guide.classList.add('show');
+  guide.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function goRDV(){
+  /* Redirection vers le calendrier de booking GHL — à activer après config */
+  console.log('Redirection RDV consultation GHL');
+  // window.location.href = "LIEN_BOOKING_GHL";
+  alert("[ Redirection agenda GHL — à connecter avec Mélanie ]");
+}
+</script>
+</body>
+</html>
